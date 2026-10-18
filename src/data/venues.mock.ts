@@ -11,8 +11,8 @@ export const INITIAL_VENUES: Venue[] = [
     reviewCount: 124,
     address: 'Gandhi Road, Tambaram West, Chennai',
     images: [
-      'https://unsplash.com/photos/a-man-in-a-white-uniform-playing-a-game-of-cricket-ZYt5BT-qxxU?w=800&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&auto=format&fit=crop&q=80',
+     
       'https://images.unsplash.com/photo-1521537634581-0dced2fee2ef?w=800&auto=format&fit=crop&q=80',
     ],
     amenities: ['Synthetic Courts', 'Floodlights', 'Locker Room', 'Parking', 'Mineral Water'],
@@ -67,9 +67,9 @@ export const INITIAL_VENUES: Venue[] = [
     reviewCount: 64,
     address: 'Mudichur Road, Tambaram, Chennai',
     images: [
-      // 'https://images.unsplash.com/photo-1531415074868-036b1c57e329?w=800&auto=format&fit=crop&q=80',
-    
-      'https://unsplash.com/photos/a-man-in-a-white-uniform-playing-a-game-of-cricket-ZYt5BT-qxxU?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1779488389208-fd2dd9550919?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D',
+      'https://images.unsplash.com/photo-1531415074868-036b1c57e329?w=800&auto=format&fit=crop&q=80',
+      
     ],
     amenities: ['Bowling Machine', 'Box Cricket Turf', 'Night Lights', 'Equipment on Rent'],
     availableSlots: {
