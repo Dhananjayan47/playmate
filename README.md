@@ -2,8 +2,8 @@
 
 PlayMate is a responsive web application designed for athletes and sports enthusiasts to discover local grounds, reserve court time slots, and connect with teammates for open pickup matches . 
 
-- Live Demo: https://playmate-sports.vercel.app 
-- Walkthrough Video: Loom Video Walkthrough (3-5 min) (https://www.loom.com/share/your-video-id) 
+- Live Demo: https://playmate-gamma.vercel.app/
+- Walkthrough Video: Loom Video Walkthrough (3-5 min) https://www.loom.com/share/87d59d93ee5f4fdf9fcb0ada57397aa2
 - Tech Stack: React 19, TypeScript, Vite, Tailwind CSS, Lucide React, React Hot Toast 
 
 ---
