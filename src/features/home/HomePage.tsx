@@ -3,7 +3,7 @@ import { Search, SlidersHorizontal, RotateCcw } from 'lucide-react';
 import { useBookingContext } from '../../context/BookingContext';
 import type { SportType } from '../../types';
 import { VenueCard } from './components/VenueCard';
-import { EmptyState } from '../../components/layout/shared/EmptyState';
+import { EmptyState } from '../../components/shared/EmptyState';
 
 const SPORTS_CATEGORIES: (SportType | 'All')[] = [
   'All',
