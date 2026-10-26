@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { BookingProvider } from './context/BookingContext';
 import { MatchProvider } from './context/MatchContext';
 import { AppRouter } from './routes/AppRouter';
+import  { AuthProvider } from './context/AuthContext';
 
 export const App: React.FC = () => {
   return (
@@ -37,11 +38,13 @@ export const App: React.FC = () => {
       />
 
       {/* Global State Providers */}
+      <AuthProvider>
       <BookingProvider>
         <MatchProvider>
           <AppRouter />
         </MatchProvider>
       </BookingProvider>
+    </AuthProvider>
     </BrowserRouter>
   );
 };
