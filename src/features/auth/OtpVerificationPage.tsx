@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {  resendOtpApi } from '../../api/auth.api';
+import {  resendOtpApi } from '../../services/auth.service';
 import { useAuth } from '../../context/AuthContext';
 
 export const OtpVerificationPage: React.FC = () => {

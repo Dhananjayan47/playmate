@@ -1,4 +1,4 @@
-import api from './axois';
+import api from './api';
 import type { User, LoginPayload,LoginResponse, RegisterPayload, VerifyOtpPayload } from '../types/auth.types';
 
 
