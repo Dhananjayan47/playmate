@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { Compass, Users, CalendarCheck, User } from 'lucide-react';
+import api from '../../services/api';
 
 export const AppLayout: React.FC = () => {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -13,6 +14,15 @@ export const AppLayout: React.FC = () => {
       isActive ? 'text-emerald-600 font-semibold' : 'text-slate-500 hover:text-slate-900'
     }`;
 
+
+    const check = async()=>{
+      console.log("jo");
+      
+      const {data}  = await api.get('/health');
+      
+      console.log(data)
+    }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col pb-16 md:pb-0">
       {/* Desktop Header */}
@@ -20,7 +30,7 @@ export const AppLayout: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <NavLink to="/" className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
-              <span onClick={()=>{localStorage.clear()}} className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-sm font-black">
+              <span onClick={check} className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-sm font-black">
                 P
               </span>
               PlayMate

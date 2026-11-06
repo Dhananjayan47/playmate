@@ -4,11 +4,19 @@ import { useAuth } from '../../context/AuthContext';
 import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import { Eye, EyeOff } from 'lucide-react';
 // import { loginUserApi } from '../../api/auth.api';
 const schema = z.object({
   email: z.email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters long'),
+  password: z
+    .string()
+    .min(8, "Password must contain at least 8 characters")
+    .max(72, "Password cannot exceed 72 characters")
+    .regex(/[a-z]/, "Password must contain a lowercase letter")
+    .regex(/[A-Z]/, "Password must contain an uppercase letter")
+    .regex(/[0-9]/, "Password must contain a number")
+    .regex(/[^A-Za-z0-9]/, "Password must contain a special character"),
 });
 
 
@@ -45,9 +53,19 @@ export const LoginPage: React.FC = () => {
       navigate('/');
     }
       
-    } catch (err: any) {
-      setError(err.message || 'Invalid email or password');
-    } finally {
+    }  catch (err: unknown) {
+  if (axios.isAxiosError<{ message?: unknown }>(err)) {
+    const message = err.response?.data?.message;
+    setError(
+      typeof message === 'string'
+        ? message
+        : err.message || 'Login failed',
+    );
+  } else {
+    setError(err instanceof Error ? err.message : 'Login failed');
+  }
+}
+  finally {
       setSubmitting(false);
     }
     // console.log('Form submitted:', data);

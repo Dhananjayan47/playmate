@@ -5,7 +5,7 @@ import axios, {
 
 const API_URL =
   import.meta.env.VITE_API_URL ||
-  'http://localhost:5000/api/v1';
+  'http://localhost:5000';
 
 // Access token exists only in JavaScript memory.
 let inMemoryAccessToken: string | null = null;

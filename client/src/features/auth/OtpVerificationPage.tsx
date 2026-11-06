@@ -2,21 +2,27 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {  resendOtpApi } from '../../services/auth.service';
 import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
 
 export const OtpVerificationPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { verifyOtp } = useAuth() as any; // Hook to set authenticated user in state
+  const { verifyOtp } = useAuth();
 
-  const tempToken = location.state?.tempToken;
-  const email = location.state?.email || 'your email';
+  const tempToken =
+    typeof location.state?.tempToken === 'string'
+      ? location.state.tempToken
+      : undefined;
+  const email =
+    typeof location.state?.email === 'string'
+      ? location.state.email
+      : 'your email';
 
-  // Guard: if accessed directly without login credentials
-//   useEffect(() => {
-//     if (!tempToken) {
-//       navigate('/login', { replace: true });
-//     }
-//   }, [tempToken, navigate]);
+  useEffect(() => {
+    if (!tempToken) {
+      navigate('/login', { replace: true });
+    }
+  }, [tempToken, navigate]);
 
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
   const [error, setError] = useState<string | null>(null);
@@ -89,28 +95,45 @@ export const OtpVerificationPage: React.FC = () => {
       setError('Please enter all 6 digits.');
       return;
     }
+    if (!tempToken) {
+      navigate('/login', { replace: true });
+      return;
+    }
 
     setError(null);
     setLoading(true);
 
     try {
-      await verifyOtp({ tempToken, otp: finalOtp });
+      await verifyOtp(tempToken, finalOtp);
       navigate('/', { replace: true });
-    } catch (err: any) {
-      setError(err.message || 'OTP verification failed');
-    } finally {
+    }  catch (err: unknown) {
+  if (axios.isAxiosError<{ message?: unknown }>(err)) {
+    const message = err.response?.data?.message;
+    setError(
+      typeof message === 'string'
+        ? message
+        : err.message || 'Login failed',
+    );
+  } else {
+    setError(err instanceof Error ? err.message : 'Login failed');
+  }
+}finally {
       setLoading(false);
     }
   };
 
   const handleResend = async () => {
     if (resendTimer > 0) return;
+    if (!tempToken) {
+      navigate('/login', { replace: true });
+      return;
+    }
     try {
       await resendOtpApi(tempToken);
       setResendTimer(60);
       setError(null);
-    } catch (err: any) {
-      setError(err.message || 'Failed to resend OTP');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to resend OTP');
     }
   };
 
